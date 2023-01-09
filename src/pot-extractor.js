@@ -504,11 +504,6 @@ export class PotExtractor {
 
     extractTsNode (filename, src, ast, startLine = 1) {
         const visit = node => {
-            if (node.text === 'i18nKey' || node.text === 'components' || node.text === 'values' || node.text === 'parent') {
-                log.info('extractTsNode visit0', `${node.text} - ${node.kind}`)
-                log.info('extractTsNode visit3', JSON.stringify(node.kind))
-                console.log('extractTsNode visit4', node)
-            }
             if (node.kind === ts.SyntaxKind.CallExpression) {
                 const pos = findNonSpace(src, node.pos)
                 const calleeName = this._getTsCalleeName(node.expression)
