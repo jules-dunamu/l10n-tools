@@ -5,11 +5,11 @@ import fs from 'fs'
 import * as path from "path"
 
 export default async function (domainName, config, potPath) {
-    const srcPaths = await getSrcPaths(config, ['.js', '.ts'])
+    const srcPaths = await getSrcPaths(config, ['.js', '.ts', '.tsx'])
     const keywords = config.get('keywords')
 
     const extractor = PotExtractor.create(domainName, {keywords})
-    log.info('extractPot', 'extracting from .js, .ts files')
+    log.info('extractPot', 'extracting from .js, .ts, .tsx files')
     for (const srcPath of srcPaths) {
         log.verbose('extractPot', `processing '${srcPath}'`)
         const ext = path.extname(srcPath)
@@ -17,6 +17,9 @@ export default async function (domainName, config, potPath) {
             const input = fs.readFileSync(srcPath, {encoding: 'UTF-8'})
             extractor.extractJsModule(srcPath, input)
         } else if (ext === '.ts') {
+            const input = fs.readFileSync(srcPath, {encoding: 'UTF-8'})
+            extractor.extractTsModule(srcPath, input)
+        } else if (ext === '.tsx') {
             const input = fs.readFileSync(srcPath, {encoding: 'UTF-8'})
             extractor.extractTsModule(srcPath, input)
         } else {
