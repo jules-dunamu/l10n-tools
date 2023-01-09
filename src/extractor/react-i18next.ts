@@ -14,8 +14,6 @@ export default async function (domainName: string, config: Config, potPath: stri
     keywords.add('_t')
     keywords.add('mmtc.i18n.t')
 
-    log.info('extractPot', keywords)
-
     const extractor = PotExtractor.create(domainName, {
         tagNames: ['react-i18next'],
         attrNames: ['i18nKey'],
