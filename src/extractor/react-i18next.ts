@@ -20,17 +20,17 @@ export default async function (domainName: string, config: Config, potPath: stri
         markers: [{start: '{', end: '}'}],
         keywords: keywords
     })
-    log.info('extractPot', 'extracting from .vue, .js, .ts files')
+    log.info('extractPot', 'extracting from .vue, .js, .ts, .tsx files')
     for (const srcPath of srcPaths) {
         log.verbose('extractPot', `processing '${srcPath}'`)
         const ext = path.extname(srcPath)
-        if (ext === '.vue') {
-            const input = fs.readFileSync(srcPath, {encoding: 'utf-8'})
-            extractor.extractVue(srcPath, input)
-        } else if (ext === '.js') {
+        if (ext === '.js') {
             const input = fs.readFileSync(srcPath, {encoding: 'utf-8'})
             extractor.extractJsModule(srcPath, input)
         } else if (ext === '.ts') {
+            const input = fs.readFileSync(srcPath, {encoding: 'utf-8'})
+            extractor.extractTsModule(srcPath, input)
+        } else if (ext === '.tsx') {
             const input = fs.readFileSync(srcPath, {encoding: 'utf-8'})
             extractor.extractTsModule(srcPath, input)
         } else {
