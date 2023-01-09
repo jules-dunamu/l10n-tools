@@ -16,7 +16,8 @@ export default async function (domainName: string, config: Config, potPath: stri
 
     const extractor = PotExtractor.create(domainName, {
         tagNames: ['react-i18next'],
-        objectAttrs: {'i18nKey': ['', 'path']},
+        attrNames: ['i18nKey'],
+        filterNames: ['i18nKey'],
         markers: [{start: '{', end: '}'}],
         keywords: keywords
     })
