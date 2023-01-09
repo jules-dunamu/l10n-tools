@@ -18,6 +18,8 @@ async function loadExtractor (type) {
             return (await import('./vue-gettext')).default
         case 'vue-i18n':
             return (await import('./vue-i18n')).default
+        case 'react-i18next':
+            return (await import('./react-i18next')).default
         case 'javascript':
         case 'i18next':
             return (await import('./javascript')).default
