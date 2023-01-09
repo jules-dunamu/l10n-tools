@@ -531,7 +531,7 @@ export class PotExtractor {
                         }
                     }
                 }
-            } else if (node.kind === ts.SyntaxKind.Identifier) {
+            } else if (node.text === 'i18nKey') {
                 for (const prop of node.properties) {
                     if (prop.kind === ts.SyntaxKind.PropertyAssignment && prop.name.text === 'template') {
                         const template = prop.initializer
