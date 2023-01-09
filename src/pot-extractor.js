@@ -505,7 +505,7 @@ export class PotExtractor {
     extractTsNode (filename, src, ast, startLine = 1) {
         const visit = node => {
             if (node.text === 'i18nKey') {
-                log.info('extractTsNode visit', node.kind, ts.SyntaxKind.CallExpression, ts.SyntaxKind.ObjectLiteralExpression)
+                log.info('extractTsNode visit', node.kind, node.properties.join(','))
             }
             if (node.kind === ts.SyntaxKind.CallExpression) {
                 const pos = findNonSpace(src, node.pos)
@@ -523,15 +523,6 @@ export class PotExtractor {
                     }
                 }
             } else if (node.kind === ts.SyntaxKind.ObjectLiteralExpression) {
-                for (const prop of node.properties) {
-                    if (prop.kind === ts.SyntaxKind.PropertyAssignment && prop.name.text === 'template') {
-                        const template = prop.initializer
-                        if (template.kind === ts.SyntaxKind.NoSubstitutionTemplateLiteral) {
-                            this.extractTemplate(filename, template.text, getLineTo(src, template.pos, startLine))
-                        }
-                    }
-                }
-            } else if (node.text === 'i18nKey') {
                 for (const prop of node.properties) {
                     if (prop.kind === ts.SyntaxKind.PropertyAssignment && prop.name.text === 'template') {
                         const template = prop.initializer
