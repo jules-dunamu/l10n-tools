@@ -14,14 +14,15 @@ export default async function (domainName: string, config: Config, potPath: stri
     keywords.add('_t')
     keywords.add('mmtc.i18n.t')
 
+    log.info('extractPot', keywords)
+
     const extractor = PotExtractor.create(domainName, {
         tagNames: ['react-i18next'],
         attrNames: ['i18nKey'],
-        filterNames: ['i18nKey'],
         markers: [{start: '{', end: '}'}],
         keywords: keywords
     })
-    log.info('extractPot', 'extracting from .vue, .js, .ts, .tsx files')
+    log.info('extractPot', 'extracting from .js, .ts, .tsx files')
     for (const srcPath of srcPaths) {
         log.verbose('extractPot', `processing '${srcPath}'`)
         const ext = path.extname(srcPath)
