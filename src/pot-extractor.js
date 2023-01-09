@@ -508,6 +508,10 @@ export class PotExtractor {
                 log.info('extractTsNode visit1', JSON.stringify(node.kind))
                 console.log('extractTsNode visit2', node)
             }
+            if (node.text === 'packParticipantsTriggerButton.participantsCount') {
+                log.info('extractTsNode visit3', JSON.stringify(node.kind))
+                console.log('extractTsNode visit4', node)
+            }
             if (node.kind === ts.SyntaxKind.CallExpression) {
                 const pos = findNonSpace(src, node.pos)
                 const calleeName = this._getTsCalleeName(node.expression)
