@@ -503,7 +503,6 @@ export class PotExtractor {
     }
 
     extractTsNode (filename, src, ast, startLine = 1) {
-        log.info('extractTsNode', filename)
         const visit = node => {
             if (node.text === 'i18nKey') {
                 log.info('extractTsNode visit', node.kind, ts.SyntaxKind.CallExpression, ts.SyntaxKind.ObjectLiteralExpression)
