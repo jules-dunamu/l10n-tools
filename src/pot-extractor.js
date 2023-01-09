@@ -505,7 +505,7 @@ export class PotExtractor {
     extractTsNode (filename, src, ast, startLine = 1) {
         const visit = node => {
             if (node.text === 'i18nKey') {
-                log.info('extractTsNode visit', node.kind, node.properties.join(','))
+                log.info('extractTsNode visit', JSON.stringify(node))
             }
             if (node.kind === ts.SyntaxKind.CallExpression) {
                 const pos = findNonSpace(src, node.pos)
