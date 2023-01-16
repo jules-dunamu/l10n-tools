@@ -16,9 +16,11 @@ export default async function (domainName: string, config: Config, potPath: stri
 
     const extractor = PotExtractor.create(domainName, {
         tagNames: ['Trans'],
-        attrNames: ['i18nKey'],
+        attrNames: ['Trans'],
+        objectAttrs: {'i18nKey': []},
         keywords: keywords
     })
+
     log.info('extractPot', 'extracting from .js, .ts, .tsx files')
     for (const srcPath of srcPaths) {
         log.verbose('extractPot', `processing '${srcPath}'`)
