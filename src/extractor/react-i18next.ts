@@ -16,8 +16,10 @@ export default async function (domainName: string, config: Config, potPath: stri
 
     const extractor = PotExtractor.create(domainName, {
         tagNames: ['Trans'],
-        attrNames: ['Trans'],
+        attrNames: ['i18nKey'],
         objectAttrs: {'i18nKey': []},
+        exprAttrs: [/^i18nKey$/],
+        markers: [{start: '{', end: '}'}],
         keywords: keywords
     })
 
