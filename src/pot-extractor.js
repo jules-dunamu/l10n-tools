@@ -510,10 +510,10 @@ export class PotExtractor {
             }
             if (node.kind === ts.SyntaxKind.CallExpression) {
                 log.info('extractTsNode CallExpression', ``)
-                console.log('extractTsNode CallExpression', node)
                 const pos = findNonSpace(src, node.pos)
                 const calleeName = this._getTsCalleeName(node.expression)
                 if (calleeName != null && this.keywordMap.hasOwnProperty(calleeName)) {
+                    console.log('extractTsNode CallExpression - ', calleeName)
                     try {
                         const position = this.keywordMap[calleeName]
                         const ids = this._evaluateTsArgumentValues(node.arguments[position])
@@ -527,9 +527,9 @@ export class PotExtractor {
                 }
             } else if (node.kind === ts.SyntaxKind.ObjectLiteralExpression) {
                 log.info('extractTsNode ObjectLiteralExpression', ``)
-                console.log('extractTsNode ObjectLiteralExpression', node)
                 for (const prop of node.properties) {
                     if (prop.kind === ts.SyntaxKind.PropertyAssignment && prop.name.text === 'template') {
+                        console.log('extractTsNode ObjectLiteralExpression - ', prop)
                         const template = prop.initializer
                         if (template.kind === ts.SyntaxKind.NoSubstitutionTemplateLiteral) {
                             this.extractTemplate(filename, template.text, getLineTo(src, template.pos, startLine))
