@@ -505,11 +505,11 @@ export class PotExtractor {
     extractTsNode (filename, src, ast, startLine = 1) {
         const visit = node => {
             if (node.text === 'Trans' || node.text === 'i18nKey') {
-                log.info('extractTsNode node, kind', `${node.text} - ${node.kind}`)
+                // log.info('extractTsNode node, kind', `${node.text} - ${node.kind}`)
                 // console.log('extractTsNode visit2', node)
             }
             if (node.kind === ts.SyntaxKind.CallExpression) {
-                log.info('extractTsNode CallExpression', ``)
+                // log.info('extractTsNode CallExpression', ``)
                 const pos = findNonSpace(src, node.pos)
                 const calleeName = this._getTsCalleeName(node.expression)
                 if (calleeName != null && this.keywordMap.hasOwnProperty(calleeName)) {
@@ -526,7 +526,7 @@ export class PotExtractor {
                     }
                 }
             } else if (node.kind === ts.SyntaxKind.ObjectLiteralExpression) {
-                log.info('extractTsNode ObjectLiteralExpression', ``)
+                // log.info('extractTsNode ObjectLiteralExpression', ``)
                 for (const prop of node.properties) {
                     if (prop.kind === ts.SyntaxKind.PropertyAssignment && prop.name.text === 'template') {
                         console.log('extractTsNode ObjectLiteralExpression - ', prop)
