@@ -504,7 +504,7 @@ export class PotExtractor {
 
     extractTsNode (filename, src, ast, startLine = 1) {
         const visit = node => {
-            if (node.text === 'Trans') {  // || node.text === 'i18nKey') {
+            if (node.text === 'Trans' || node.text === 'i18nKey') {
                 log.info('extractTsNode visit0', `${node.text} - ${node.kind}`)
                 log.info('extractTsNode visit1', JSON.stringify(node.kind))
                 console.log('extractTsNode visit2', node)
